@@ -9,6 +9,7 @@
 ### 🗓️ 2025.09.17 - 项目初始化
 
 **今日完成任务**：
+
 - ✅ 项目初始化，选择 Vue3 + TypeScript + Vite 技术栈
 - ✅ 完成开发环境配置（ESLint、Prettier、StyleLint）
 - ✅ 集成代码规范工具（Husky、CommitLint）
@@ -18,6 +19,7 @@
 ### 🗓️ 2025.09.19 - 接口与数据层搭建
 
 **今日完成任务**：
+
 - ✅ Mock 接口配置和数据模拟
 - ✅ Axios 二次封装和拦截器配置
 - ✅ API 接口统一管理架构
@@ -28,6 +30,7 @@
 **目的**: 在后端接口未完成时，通过 Mock 数据进行前端开发
 
 **安装依赖**:
+
 > 📚 参考文档: https://www.npmjs.com/package/vite-plugin-mock
 
 ```bash
@@ -86,70 +89,72 @@ export default defineConfig(({ command }) => {
 ```typescript
 // 用户信息数据
 function createUserList() {
-    return [
-        {
-            userId: 1,
-            avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-            username: 'admin',
-            password: '111111',
-            desc: '平台管理员',
-            roles: ['平台管理员'],
-            buttons: ['cuser.detail'],
-            routes: ['home'],
-            token: 'Admin Token',
-        },
-        {
-            userId: 2,
-            avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-            username: 'system',
-            password: '111111',
-            desc: '系统管理员',
-            roles: ['系统管理员'],
-            buttons: ['cuser.detail', 'cuser.user'],
-            routes: ['home'],
-            token: 'System Token',
-        },
-    ]
+  return [
+    {
+      userId: 1,
+      avatar:
+        'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+      username: 'admin',
+      password: '111111',
+      desc: '平台管理员',
+      roles: ['平台管理员'],
+      buttons: ['cuser.detail'],
+      routes: ['home'],
+      token: 'Admin Token',
+    },
+    {
+      userId: 2,
+      avatar:
+        'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+      username: 'system',
+      password: '111111',
+      desc: '系统管理员',
+      roles: ['系统管理员'],
+      buttons: ['cuser.detail', 'cuser.user'],
+      routes: ['home'],
+      token: 'System Token',
+    },
+  ]
 }
 
 export default [
-    // 🔐 用户登录接口
-    {
-        url: '/api/user/login', // 请求地址
-        method: 'post', // 请求方式
-        response: ({ body }) => {
-            // 获取请求体携带的用户名与密码
-            const { username, password } = body;
-            // 调用获取用户信息函数，判断是否有此用户
-            const checkUser = createUserList().find(
-                (item) => item.username === username && item.password === password,
-            )
-            // 用户不存在，返回失败信息
-            if (!checkUser) {
-                return { code: 201, data: { message: '账号或者密码不正确' } }
-            }
-            // 用户存在，返回成功信息
-            const { token } = checkUser
-            return { code: 200, data: { token } }
-        },
+  // 🔐 用户登录接口
+  {
+    url: '/api/user/login', // 请求地址
+    method: 'post', // 请求方式
+    response: ({ body }) => {
+      // 获取请求体携带的用户名与密码
+      const { username, password } = body
+      // 调用获取用户信息函数，判断是否有此用户
+      const checkUser = createUserList().find(
+        (item) => item.username === username && item.password === password,
+      )
+      // 用户不存在，返回失败信息
+      if (!checkUser) {
+        return { code: 201, data: { message: '账号或者密码不正确' } }
+      }
+      // 用户存在，返回成功信息
+      const { token } = checkUser
+      return { code: 200, data: { token } }
     },
-    // 👤 获取用户信息接口
-    {
-        url: '/api/user/info',
-        method: 'get',
-        response: (request) => {
-            // 获取请求头携带的 token
-            const token = request.headers.token;
-            // 查看用户信息是否包含此 token 用户
-            const checkUser = createUserList().find((item) => item.token === token)
-            // token 无效，返回失败信息
-            if (!checkUser) {
-                return { code: 201, data: { message: '获取用户信息失败' } }
-            }
-            // token 有效，返回成功信息
-            return { code: 200, data: { checkUser } }
-        },
+  },
+  // 👤 获取用户信息接口
+  {
+    url: '/api/user/info',
+    method: 'get',
+    response: (request) => {
+      // 获取请求头携带的 token
+      const token = request.headers.token
+      // 查看用户信息是否包含此 token 用户
+      const checkUser = createUserList().find((item) => item.token === token)
+      // token 无效，返回失败信息
+      if (!checkUser) {
+        return { code: 201, data: { message: '获取用户信息失败' } }
+      }
+      // token 有效，返回成功信息
+      return { code: 200, data: { checkUser } }
     },
+  },
 ]
 ```
 
@@ -167,56 +172,59 @@ export default [
 > 📁 **文件路径**: `src/utils/request.ts`
 
 ```typescript
-import axios from "axios";
-import { ElMessage } from "element-plus";
+import axios from 'axios'
+import { ElMessage } from 'element-plus'
 
 // 创建 axios 实例
 let request = axios.create({
-    baseURL: import.meta.env.VITE_APP_BASE_API, // 基础 URL
-    timeout: 5000 // 请求超时时间
+  baseURL: import.meta.env.VITE_APP_BASE_API, // 基础 URL
+  timeout: 5000, // 请求超时时间
 })
 
 // 📤 请求拦截器
-request.interceptors.request.use(config => {
-    // 在发送请求之前做些什么
-    // 可以在这里添加 loading、token 等
-    return config;
-});
+request.interceptors.request.use((config) => {
+  // 在发送请求之前做些什么
+  // 可以在这里添加 loading、token 等
+  return config
+})
 
 // 📥 响应拦截器
-request.interceptors.response.use((response) => {
+request.interceptors.response.use(
+  (response) => {
     // 对响应数据做点什么
-    return response.data;
-}, (error) => {
+    return response.data
+  },
+  (error) => {
     // 🚨 处理网络错误
-    let msg = '';
-    let status = error.response.status;
+    let msg = ''
+    let status = error.response.status
     switch (status) {
-        case 401:
-            msg = "token过期";
-            break;
-        case 403:
-            msg = '无权访问';
-            break;
-        case 404:
-            msg = "请求地址错误";
-            break;
-        case 500:
-            msg = "服务器出现问题";
-            break;
-        default:
-            msg = "无网络";
+      case 401:
+        msg = 'token过期'
+        break
+      case 403:
+        msg = '无权访问'
+        break
+      case 404:
+        msg = '请求地址错误'
+        break
+      case 500:
+        msg = '服务器出现问题'
+        break
+      default:
+        msg = '无网络'
     }
-    
+
     // 显示错误消息
     ElMessage({
-        type: 'error',
-        message: msg
+      type: 'error',
+      message: msg,
     })
-    return Promise.reject(error);
-});
+    return Promise.reject(error)
+  },
+)
 
-export default request;
+export default request
 ```
 
 #### 3. 📋 API 接口统一管理
@@ -241,9 +249,9 @@ import type {
 
 // 项目用户相关的请求地址
 enum API {
-  LOGIN_URL = '/user/login',      // 登录接口
-  USERINFO_URL = '/user/info',    // 获取用户信息接口
-  LOGOUT_URL = '/user/logout',    // 退出登录接口
+  LOGIN_URL = '/user/login', // 登录接口
+  USERINFO_URL = '/user/info', // 获取用户信息接口
+  LOGOUT_URL = '/user/logout', // 退出登录接口
 }
 
 // 🔐 登录接口
@@ -318,11 +326,9 @@ pnpm install vue-router
 ---
 
 2025.09.24
-真是怠惰了,前几天因为晚上沉迷蛊真人导致白天没精力学习,拖到今天才继续做项目
-1.登录页面搭建以及业务实现
-2.安装pinia
+真是怠惰了,前几天因为晚上沉迷蛊真人导致白天没精力学习,拖到今天才继续做项目1.登录页面搭建以及业务实现2.安装pinia并创建用户相关小仓库
 src目录下新建src/store/index.ts文件
-
+在src/store/modules/user.ts文件中创建用户相关小仓库
 
 ## ⚙️ 开发环境配置
 

@@ -22,6 +22,7 @@
           </el-form-item>
           <el-form-item>
             <el-button
+              :loading="loading"
               class="login_btn"
               type="primary"
               size="default"
@@ -39,22 +40,40 @@
 <script setup lang="ts">
 import { reqLogin } from '@/api/user'
 import { User, Lock } from '@element-plus/icons-vue'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import useUserStore from '@/store/modules/user'
+import { ElNotification } from 'element-plus'
+
+let $router = useRouter()
+let loading = ref(false)
+let useStore = useUserStore()
 //收集账号与密码数据
 let loginForm = reactive({ username: 'admin', password: '111111' })
 // 登录按钮回调
-const login = () => {
+const login = async () => {
   console.log('我喜欢你')
+  loading.value = true
   // 1.通知仓库发送登录请求
   // 2.请求成功 -> 跳转首页
   // 3.请求失败 -> 提示错误信息
-  reqLogin(loginForm)
-    .then((res) => {
-      console.log(res)
+  try {
+    await useStore.userLogin(loginForm)
+    $router.push('/')
+    ElNotification.success({
+      type: 'success',
+      title: '登录成功',
+      message: '登录成功',
     })
-    .catch((err) => {
-      console.log(err)
+    loading.value = false
+  } catch (err) {
+    loading.value = false
+    ElNotification.error({
+      type: 'error',
+      title: '登录失败',
+      message: (err as Error).message,
     })
+  }
 }
 </script>
 

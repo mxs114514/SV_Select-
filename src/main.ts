@@ -11,12 +11,16 @@ import 'virtual:svg-icons-register'
 import gloablComponent from './components/index.ts'
 // 引入路由
 import router from './router'
+// 引入仓库
+import pinia from './store'
 
 import App from './App.vue'
 
 const app = createApp(App)
 // 安装自定义插件
 app.use(gloablComponent)
+// 安装仓库
+app.use(pinia)
 // 安装路由
 app.use(router)
 app.use(ElementPlus, {
