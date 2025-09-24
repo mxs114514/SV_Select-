@@ -1,228 +1,193 @@
-开发日志
-#9.17
-昨天快速上手玩 ts 之后直接开始干项目吧！希望做完这个项目能让我巩固一下 vue 的知识，顺便学一下常用的 pinia，axios 等技术栈
+# 🚀 硅谷甄选运营平台
 
-##开发前的一些配置
+[![Vue](https://img.shields.io/badge/Vue-3.x-brightgreen.svg)](https://vuejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF.svg)](https://vitejs.dev/)
+[![Element Plus](https://img.shields.io/badge/Element%20Plus-2.x-409EFF.svg)](https://element-plus.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-1. eslint--代码质量检测工具
+> 🎯 基于 Vue3 + TypeScript + Vite + Element Plus 构建的现代化企业级运营管理平台
 
-# 传统方式（需要全局安装）
+## 📋 目录
 
-npm install -g eslint
-eslint --init
+- [🚀 硅谷甄选运营平台](#-硅谷甄选运营平台)
+  - [📋 目录](#-目录)
+  - [✨ 项目特性](#-项目特性)
+  - [🛠️ 技术栈](#️-技术栈)
+  - [🚀 快速开始](#-快速开始)
+    - [环境要求](#环境要求)
+    - [安装依赖](#安装依赖)
+    - [启动项目](#启动项目)
+  - [📁 项目结构](#-项目结构)
+  - [📝 开发日志](#-开发日志)
+  - [⚙️ 开发环境配置](#️-开发环境配置)
+    - [1. ESLint 配置](#1-eslint-配置)
+    - [2. Prettier 配置](#2-prettier-配置)
+    - [3. StyleLint 配置](#3-stylelint-配置)
+    - [4. Husky 配置](#4-husky-配置)
+    - [5. CommitLint 配置](#5-commitlint-配置)
+    - [6. 统一包管理工具](#6-统一包管理工具)
+  - [🔧 项目配置](#-项目配置)
+    - [7. Element Plus 配置](#7-element-plus-配置)
+    - [8. 路径别名配置](#8-路径别名配置)
+    - [9. 环境变量配置](#9-环境变量配置)
+    - [10. SVG 图标配置](#10-svg-图标配置)
+    - [11. Sass 样式配置](#11-sass-样式配置)
+  - [📚 使用指南](#-使用指南)
+  - [🤝 贡献指南](#-贡献指南)
+  - [📄 许可证](#-许可证)
 
-# 现代推荐方式（不同项目隔离）
+---
 
-npm init @eslint/config
-生成配置文件: npm init @eslint/config
+## ✨ 项目特性
 
-1.1vue3 环境代码校验插件
+- 🎨 **现代化 UI**：基于 Element Plus 组件库，提供美观的用户界面
+- 🚀 **高性能**：使用 Vite 构建工具，享受极速的开发体验
+- 💪 **类型安全**：全面使用 TypeScript，提供完整的类型检查
+- 🔧 **工程化**：完整的代码规范、提交规范、自动化工具链
+- 📱 **响应式**：支持多端适配，提供良好的移动端体验
+- 🎯 **组件化**：高度组件化的开发模式，提高代码复用性
+- 🌍 **国际化**：支持多语言切换（默认中文）
+- 🎪 **图标系统**：集成 SVG 图标系统，支持自定义图标
 
-# 让所有与 prettier 规则存在冲突的 Eslint rules 失效，并使用 prettier 进行代码检查
+## 🛠️ 技术栈
 
-"eslint-config-prettier"
-"eslint-plugin-import"
-"eslint-plugin-node"
+| 技术                                          | 版本 | 描述                                |
+| --------------------------------------------- | ---- | ----------------------------------- |
+| [Vue.js](https://vuejs.org/)                  | 3.x  | 渐进式 JavaScript 框架              |
+| [TypeScript](https://www.typescriptlang.org/) | 5.x  | JavaScript 的超集，提供静态类型检查 |
+| [Vite](https://vitejs.dev/)                   | 5.x  | 下一代前端构建工具                  |
+| [Element Plus](https://element-plus.org/)     | 2.x  | 基于 Vue 3 的组件库                 |
+| [Vue Router](https://router.vuejs.org/)       | 4.x  | Vue.js 官方路由管理器               |
+| [Pinia](https://pinia.vuejs.org/)             | 2.x  | Vue 的状态管理库                    |
+| [Axios](https://axios-http.com/)              | 1.x  | 基于 Promise 的 HTTP 客户端         |
+| [Sass](https://sass-lang.com/)                | 1.x  | CSS 预处理器                        |
 
-# 运行更漂亮的 Eslint，使 prettier 规则优先级更高，Eslint 优先级低
+### 开发工具
 
-"eslint-plugin-prettier"
+- **ESLint** - 代码质量检测
+- **Prettier** - 代码格式化
+- **StyleLint** - CSS/SCSS 代码规范
+- **Husky** - Git 钩子管理
+- **CommitLint** - 提交信息规范
 
-# vue.js 的 Eslint 插件（查找 vue 语法错误，发现错误指令，查找违规风格指南
+---
 
-"eslint-plugin-vue"
+## 🚀 快速开始
 
-# 该解析器允许使用 Eslint 校验所有 babel code
+### 环境要求
 
-"@babel/eslint-parser"
+- **Node.js**: >= 18.0.0
+- **pnpm**: >= 8.0.0 (推荐使用 pnpm 作为包管理器)
 
-```
-安装指令
+### 安装依赖
 
-```
+```bash
+# 克隆项目
+git clone <repository-url>
 
-pnpm install -D eslint-plugin-import eslint-plugin-vue eslint-plugin-node eslint-plugin-prettier eslint-config-prettier eslint-plugin-node @babel/eslint-parser vue-eslint-parser
+# 进入项目目录
+cd SV_Select
 
-```
-1.2修改eslint.config.ts配置文件
-
-1.3.添加忽略文件
-ignores: ["dist/", "node_modules/"],
-
-
-1.4运行脚本
-package.json新增两个运行脚本
-
-```
-
-"scripts": {
-"lint": "eslint src",
-"fix": "eslint src --fix",
-}
-
-```
-
-2. prettier
-ESLint：保证代码​​正确性​​（能不能运行）
-Prettier：保证代码​​美观度​​（好不好看）
-
-##### 2.1安装依赖包
-
-```
-
-pnpm install -D eslint-plugin-prettier prettier eslint-config-prettier
-
-```
-##### 2.2.创建.prettierrc.json并添加规则
-
-```
-
-{
-"singleQuote": true,
-"semi": false,
-"bracketSpacing": true,
-"htmlWhitespaceSensitivity": "ignore",
-"endOfLine": "auto",
-"trailingComma": "all",
-"tabWidth": 2
-}
-
-```
-##### 2.3.创建.prettierignore忽略文件
-
-```
-
-/dist/_
-/html/_
-.local
-/node*modules/\**
-\*\*/_.svg \*_/\_.sh
-/public/\*
-
-```
-**现在可以通过pnpm run lint去检测语法，如果出现不规范格式,通过pnpm run fix 修改**
-
-3. styleLint
-这是css的lint工具。可格式化css代码，检查css语法错误与不合理的写法，指定css书写顺序等。
-
-我们的项目中使用scss作为预处理器，安装以下依赖：
-
+# 安装依赖
+pnpm install
 ```
 
-pnpm add sass sass-loader stylelint postcss postcss-scss postcss-html stylelint-config-prettier stylelint-config-recess-order stylelint-config-recommended-scss stylelint-config-standard stylelint-config-standard-vue stylelint-scss stylelint-order stylelint-config-standard-scss -D
+### 启动项目
 
-```
-##### 3.1`.stylelintrc.cjs`**配置文件**
+```bash
+# 开发环境启动
+pnpm dev
 
-**官网:https://stylelint.bootcss.com/**
-module.exports = {
-  extends: [
-    'stylelint-config-standard', // 配置stylelint拓展插件
-    'stylelint-config-html/vue', // 配置 vue 中 template 样式格式化
-    'stylelint-config-standard-scss', // 配置stylelint scss插件
-    'stylelint-config-recommended-vue/scss', // 配置 vue 中 scss 样式格式化
-    'stylelint-config-recess-order', // 配置stylelint css属性书写顺序插件,
-    'stylelint-config-prettier', // 配置stylelint和prettier兼容
-  ],
-  overrides: [
-    {
-      files: ['**/*.(scss|css|vue|html)'],
-      customSyntax: 'postcss-scss',
-    },
-    {
-      files: ['**/*.(html|vue)'],
-      customSyntax: 'postcss-html',
-    },
-  ],
-  ignoreFiles: [
-    '**/*.js',
-    '**/*.jsx',
-    '**/*.tsx',
-    '**/*.ts',
-    '**/*.json',
-    '**/*.md',
-    '**/*.yaml',
-  ],
-  /**
-   * null  => 关闭该规则
-   * always => 必须
-   */
-  rules: {
-    'value-keyword-case': null, // 在 css 中使用 v-bind，不报错
-    'no-descending-specificity': null, // 禁止在具有较高优先级的选择器后出现被其覆盖的较低优先级的选择器
-    'function-url-quotes': 'always', // 要求或禁止 URL 的引号 "always(必须加上引号)"|"never(没有引号)"
-    'no-empty-source': null, // 关闭禁止空源码
-    'selector-class-pattern': null, // 关闭强制选择器类名的格式
-    'property-no-unknown': null, // 禁止未知的属性(true 为不允许)
-    'block-opening-brace-space-before': 'always', //大括号之前必须有一个空格或不能有空白符
-    'value-no-vendor-prefix': null, // 关闭 属性值前缀 --webkit-box
-    'property-no-vendor-prefix': null, // 关闭 属性前缀 -webkit-mask
-    'selector-pseudo-class-no-unknown': [
-      // 不允许未知的选择器
-      true,
-      {
-        ignorePseudoClasses: ['global', 'v-deep', 'deep'], // 忽略属性，修改element默认样式的时候能使用到
-      },
-    ],
-  },
-}
+# 构建生产环境
+pnpm build
+
+# 构建测试环境
+pnpm build:test
+
+# 预览构建结果
+pnpm preview
 ```
 
-##### 3.2.stylelintignore忽略文件
+---
+
+## 📁 项目结构
 
 ```
-/node_modules/*
-/dist/*
-/html/*
-/public/*
+SV_Select/
+├── 📁 public/                 # 静态资源
+├── 📁 src/                    # 源代码
+│   ├── 📁 assets/            # 资源文件
+│   │   ├── 📁 icons/         # SVG 图标
+│   │   └── 📁 images/        # 图片资源
+│   ├── 📁 components/        # 全局组件
+│   │   └── 📁 SvgIcon/       # SVG 图标组件
+│   ├── 📁 styles/            # 样式文件
+│   │   ├── 📄 index.scss     # 主样式文件
+│   │   ├── 📄 reset.scss     # 重置样式
+│   │   └── 📄 variable.scss  # 样式变量
+│   ├── 📄 App.vue            # 根组件
+│   ├── 📄 main.ts            # 入口文件
+│   └── 📄 vite-env.d.ts      # Vite 类型声明
+├── 📄 .env.development        # 开发环境变量
+├── 📄 .env.production         # 生产环境变量
+├── 📄 .env.test              # 测试环境变量
+├── 📄 vite.config.ts         # Vite 配置
+├── 📄 tsconfig.json          # TypeScript 配置
+├── 📄 package.json           # 项目依赖
+└── 📄 README.md              # 项目说明
 ```
 
-##### 3.3运行脚本
+---
 
-配置统一的prettier来格式化我们的js和css，html代码
+## 📚 使用指南
 
-```
-"scripts": {
-	    "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\"",
-    "lint:eslint": "eslint src/**/*.{ts,vue} --cache --fix",
-    "lint:style": "stylelint src/**/*.{css,scss,vue} --cache --fix"
-}
-```
+### 开发流程
 
-执行pnpm run format 格式化代码
+1. **克隆项目并安装依赖**
 
-4. husky
-在上面我们已经集成好了我们代码校验工具，但是需要每次手动的去执行命令才会格式化我们的代码。如果有人没有格式化就提交了远程仓库中，那这个规范就没什么用。所以我们需要强制让开发人员按照代码规范来提交。
-要做到这件事情，就需要利用husky在代码提交之前触发git hook(git在客户端的钩子)，然后执行`pnpm run format`来自动的格式化我们的代码。
-重要：注意先把本项目添加到git仓库中，否则husky不会生效。
-安装`husky`
+   ```bash
+   git clone <repository-url>
+   cd SV_Select
+   pnpm install
+   ```
 
-```
-pnpm install -D husky
-```
+2. **启动开发服务器**
 
-执行
+   ```bash
+   pnpm dev
+   ```
 
-```
-npx husky-init
-```
+3. **代码开发**
+   - 遵循 ESLint 和 Prettier 规范
+   - 使用 TypeScript 进行类型安全开发
+   - 组件开发使用 Vue 3 Composition API
 
-会在根目录下生成个一个.husky目录，在这个目录下面会有一个pre-commit文件，这个文件里面的命令在我们执行commit的时候就会执行
+4. **提交代码**
+   ```bash
+   git add .
+   git commit -m 'feat: 添加新功能'
+   git push
+   ```
 
-在`.husky/pre-commit`文件添加如下命令：
+### 常用命令
 
-```
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-pnpm run format
-```
+| 命令              | 描述             |
+| ----------------- | ---------------- |
+| `pnpm dev`        | 启动开发服务器   |
+| `pnpm build`      | 构建生产版本     |
+| `pnpm build:test` | 构建测试版本     |
+| `pnpm preview`    | 预览构建结果     |
+| `pnpm lint`       | 检查代码质量     |
+| `pnpm fix`        | 自动修复代码问题 |
+| `pnpm format`     | 格式化代码       |
 
-当我们对代码进行commit操作的时候，就会执行命令，对代码进行格式化，然后再提交。
+### 注意事项
 
-5. commitLint
-6. 统一包管理工具
-7. element-plus
+- ✅ 必须使用 pnpm 作为包管理器
+- ✅ 提交信息必须符合 CommitLint 规范
+- ✅ 代码必须通过 ESLint 检查
+- ✅ 样式文件必须通过 StyleLint 检查
+- ✅ 使用 TypeScript 进行类型安全开发
 
-```
-
-```
+---
